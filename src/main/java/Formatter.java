@@ -43,7 +43,7 @@ public class Formatter {
         result.replace(1, index[0], dividend.toString());
     }
     
-    public String assemblyString(int numberOfSymbols, char symbol) {
+    private String assemblyString(int numberOfSymbols, char symbol) {
         StringBuilder string = new StringBuilder();
         for (int i = 0; i < numberOfSymbols; i++) {
             string.append(symbol);
@@ -51,11 +51,11 @@ public class Formatter {
         return string.toString();
     }
     
-    public String makeDivider(Integer reminderNumber, Integer tab) {
+    private String makeDivider(Integer reminderNumber, Integer tab) {
         return assemblyString(tab, ' ') + assemblyString(calculateDigit(reminderNumber), '-');
     }
     
-    public int calculateDigit(int i) {
+    private int calculateDigit(int i) {
         return (int) Math.log10(i) + 1;
     }
     

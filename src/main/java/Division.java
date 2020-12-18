@@ -4,6 +4,14 @@ public class Division {
     Formatter form = new Formatter();
 
     public String makeDivision(int dividend, int divisor) {
+        
+        if (divisor == 0) {
+            throw new IllegalArgumentException("Wrong divisor, it's cannot be zero");
+        }
+
+        if (dividend < divisor) {
+            return "The result of this expression is zero!";
+        }
 
         String[] digits = String.valueOf(dividend).split("");
         Integer reminderNumber;
