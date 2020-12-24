@@ -1,46 +1,46 @@
+import java.util.List;
+
 public class Formatter {
     
-    private StringBuilder quotient = new StringBuilder();
-    private StringBuilder result = new StringBuilder();
-    private int lastReminderLength; 
-    
-    
-    public void makeLastReminder(Integer reminderNumber, int index) {
-        String lastReminder = String.format("%" + (index + 2) + "s", "_" + reminderNumber.toString());
-        this.lastReminderLength = lastReminder.length();
-        result.append(lastReminder).append("\n");
-    }
-    
-    public void makeMultiply(Integer multiplyResult, int index ) {
-        String multiply = String.format("%" + (index + 2) + "d", multiplyResult);
-        result.append(multiply).append("\n");
-    }
-    
-    public void makeTab(int multiplyResult, Integer reminderNumber) {
-        Integer tab = this.lastReminderLength - calculateDigit(multiplyResult);
-        result.append(makeDivider(reminderNumber, tab)).append("\n");
-    }
-    
-    public void makeLastLine(Integer reminderNumber, int index) {
-        result.append(String.format("%" + (index + 2) + "s", reminderNumber.toString())).append("\n");
-    }
-    
-    public void modifyResultToView(Integer dividend, Integer divisor) {
-        int[] index = new int[3];
-        for (int i = 0, j = 0; i < result.length(); i++) {
-            if (result.charAt(i) == '\n') {
-                index[j] = i;
-                j++;
+    public String formatToPrint(List<DTO> divisionStages) {
+        StringBuilder result = new StringBuilder();
+        StringBuilder quotient = new StringBuilder();
+        int dividend = divisionStages.get(0).getDividend();
+        int divisor = divisionStages.get(0).getDivisor();
+        
+        for (DTO stage : divisionStages) {
+            if (stage.getIndex() < stage.getDivisorDigit()) {
+                String lastReminder = String.format("%" + (stage.getIndex() + 2) + "s", "_" + stage.getReminderNumber().toString());
+                result.append(lastReminder).append("\n");
+            
+                String multiply = String.format("%" + (stage.getIndex() + 2) + "d", stage.getMultiplyResult());
+                result.append(multiply).append("\n");
+            
+                Integer tab = lastReminder.length() - calculateDigit(stage.getMultiplyResult());
+                result.append(makeDivider(stage.getReminderNumber(), tab)).append("\n");
+            
+                quotient.append(stage.getReminderNumber() / stage.getDivisor());
+            
+                stage.setReminder(0, stage.getReminder().length(), stage.getMod().toString());
+                stage.setReminderNumber(Integer.parseInt(stage.getReminder().toString()));
+            } else {
+                quotient.append(0);
+                } 
+            
+            if (stage.getIndex() == stage.getDigitCounter()) {
+                result.append(String.format("%" + (stage.getIndex() + 2) + "s", stage.getReminderNumber().toString())).append("\n");
             }
-
-            if (j == 3) {break;}
         }
-
-        int tab = calculateDigit(dividend) + 1 - index[0];
-        result.insert(index[2], assemblyString(tab, ' ') +"│" + quotient.toString());
-        result.insert(index[1], assemblyString(tab, ' ') +"│" + assemblyString(quotient.length(), '-'));
-        result.insert(index[0], "│" + divisor);
-        result.replace(1, index[0], dividend.toString());
+        modifyResultToView(dividend, divisor, result, quotient);
+        return result.toString();
+    }
+    
+    private int calculateDigit(int i) {
+        return (int) Math.log10(i) + 1;
+    }
+    
+    private String makeDivider(Integer reminderNumber, Integer tab) {
+        return assemblyString(tab, ' ') + assemblyString(calculateDigit(reminderNumber), '-');
     }
     
     private String assemblyString(int numberOfSymbols, char symbol) {
@@ -51,19 +51,23 @@ public class Formatter {
         return string.toString();
     }
     
-    private String makeDivider(Integer reminderNumber, Integer tab) {
-        return assemblyString(tab, ' ') + assemblyString(calculateDigit(reminderNumber), '-');
-    }
-    
-    private int calculateDigit(int i) {
-        return (int) Math.log10(i) + 1;
-    }
-    
-    public void appendToQuotient(Integer i) {
-        this.quotient.append(i);
-    }
-    
-    public String getResult() {
-        return this.result.toString();
+    private void modifyResultToView(Integer dividend, Integer divisor, StringBuilder result, StringBuilder quotient) {
+        int[] index = new int[3];
+        for (int i = 0, j = 0; i < result.length(); i++) {
+            if (result.charAt(i) == '\n') {
+                index[j] = i;
+                j++;
+            }
+
+            if (j == 3) {
+                break;
+            }
+        }
+
+        int tab = calculateDigit(dividend) + 1 - index[0];
+        result.insert(index[2], assemblyString(tab, ' ') +"│" + quotient.toString());
+        result.insert(index[1], assemblyString(tab, ' ') +"│" + assemblyString(quotient.length(), '-'));
+        result.insert(index[0], "│" + divisor);
+        result.replace(1, index[0], dividend.toString());
     }
 }

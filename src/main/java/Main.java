@@ -1,28 +1,19 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws InputMismatchException {
-       Division div = new Division();
-       Scanner scanner = new Scanner(System.in);
+       Calculate calc = new Calculate();
+       Formatter form = new Formatter();
+//       Template t = new Template();
+       List<DTO> stages = new ArrayList<>();
+       String result;
        
-       try {
-           while (true) {
-               System.out.println("Please, type a dividend or type 'Q' for exit programm");
-               int dividend = scanner.nextInt();
-               if (dividend == 'q') {
-                   scanner.close();
-                   break;
-               }
-               System.out.println("Type a divisor");
-               int divisor = scanner.nextInt();
-           
-               String result = div.makeDivision(dividend, divisor);
-               System.out.println(result);
-           }
-       } catch (InputMismatchException ex) {
-           System.out.println("See you later");
-       }
+       result = form.formatToPrint(calc.longDivisions(123, 3));
+       System.out.println(result);
+       
     }
 }
