@@ -9,7 +9,7 @@ public class Formatter {
         int divisor = divisionStages.get(0).getDivisor();
         
         for (DTO stage : divisionStages) {
-            if (stage.getIndex() < stage.getDivisorDigit()) {
+            if (stage.getReminderNumber() >= stage.getDivisor()) {
                 String lastReminder = String.format("%" + (stage.getIndex() + 2) + "s", "_" + stage.getReminderNumber().toString());
                 result.append(lastReminder).append("\n");
             
@@ -21,13 +21,15 @@ public class Formatter {
             
                 quotient.append(stage.getReminderNumber() / stage.getDivisor());
             
-                stage.setReminder(0, stage.getReminder().length(), stage.getMod().toString());
+                stage.setReminder(0, stage.getReminder().length(), stage.getMod().toString()); // must refresh to 0 every iterations
                 stage.setReminderNumber(Integer.parseInt(stage.getReminder().toString()));
             } else {
-                quotient.append(0);
-                } 
+                if (stage.getIndex() >= stage.getDivisorDigit()) {
+                    quotient.append(0);
+                }
+            } 
             
-            if (stage.getIndex() == stage.getDigitCounter()) {
+            if (stage.getIndex() == stage.getDigitCounter() - 1) {
                 result.append(String.format("%" + (stage.getIndex() + 2) + "s", stage.getReminderNumber().toString())).append("\n");
             }
         }

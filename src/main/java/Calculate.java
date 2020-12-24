@@ -24,7 +24,10 @@ public class Calculate {
                 multiplyResult = reminderNumber / divisor * divisor;
                 
                 stages.add(new DTO(reminder, reminderNumber, multiplyResult, 
-                        divisorDigit, mod, dividend, divisor, i, digits.length - 1));
+                        divisorDigit, mod, dividend, divisor, i, digits.length));
+                
+                reminder.replace(0, reminder.length(), mod.toString());
+                reminderNumber = Integer.parseInt(reminder.toString());
             }
         }
         return stages;
