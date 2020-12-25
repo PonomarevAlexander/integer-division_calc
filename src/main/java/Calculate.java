@@ -1,12 +1,13 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Calculate {
     
-    public List<DTO> longDivisions(int dividend, int divisor) {
+    public List<DivisionDTO> longDivisions(int dividend, int divisor) {
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        List<DTO> stages = new ArrayList<>();
+        List<DivisionDTO> stages = new ArrayList<>();
         StringBuilder reminder = new StringBuilder();
         String[] digits = String.valueOf(dividend).split("");
         Integer divisorDigit = (int) Math.log10(divisor) + 1;
@@ -23,7 +24,7 @@ public class Calculate {
                 mod = reminderNumber % divisor;
                 multiplyResult = reminderNumber / divisor * divisor;
                 
-                stages.add(new DTO(reminder, reminderNumber, multiplyResult, 
+                stages.add(new DivisionDTO(reminder, reminderNumber, multiplyResult, 
                         divisorDigit, mod, dividend, divisor, i, digits.length));
                 
                 reminder.replace(0, reminder.length(), mod.toString());
