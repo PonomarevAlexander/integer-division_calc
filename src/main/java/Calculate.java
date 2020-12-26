@@ -28,7 +28,6 @@ public class Calculate {
                         divisorDigit, mod, dividend, divisor, i, digits.length));
                 
                 reminder.replace(0, reminder.length(), mod.toString());
-                reminderNumber = Integer.parseInt(reminder.toString());
             }
         }
         return stages;

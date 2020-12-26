@@ -13,7 +13,7 @@ class DivisionFormatterTest {
     private static final int DIVIDEND = 375;
     private static final int DIVISOR = 9;
     private static final List<DivisionDTO> STAGES = calc.longDivisions(DIVIDEND, DIVISOR);
-    private static final List<DivisionDTO> EMPTY_STAGES_LIST = new ArrayList();
+    private static final List<DivisionDTO> EMPTY_STAGES_LIST = new ArrayList<>();
     private static final String EXPECTED = "_375│9\n"
             + " 36 │--\n"
             + " -- │41\n"

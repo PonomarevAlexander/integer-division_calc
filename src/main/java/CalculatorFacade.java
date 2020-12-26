@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorFacade {
@@ -12,8 +11,7 @@ public class CalculatorFacade {
     }
     
     public String longDivision(int dividend, int divisor) {
-        List<DivisionDTO> stages = new ArrayList<>();
-        stages = calculate.longDivisions(dividend, divisor);
+        List<DivisionDTO> stages = calculate.longDivisions(dividend, divisor);
         return formatter.formatToPrint(stages);
         
     }
