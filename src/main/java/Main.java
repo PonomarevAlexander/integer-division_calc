@@ -5,36 +5,37 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        DivisionFormatter form = new DivisionFormatter();
-        Calculate calc = new Calculate();
+        CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculate());
         
-        
-        try {
-            while (true) {
-                System.out.println("Enter dividend...");
-                int dividend = scanner.nextInt();
-                if (dividend == 'q') {
+        while (true) {
+            try {
+                System.out.println("Enter first number or -1 for exit...");
+                int firstNum = scanner.nextInt();
+                if (firstNum == -1) {
                     scanner.close();
                     break;
                 } else {
-                    System.out.println("Enter divisor...");
-                    int divisor = scanner.nextInt();
+                    System.out.println("Enter second number...");
+                    int secondNum = scanner.nextInt();
                 
-                    if (divisor == 0) {
-                        throw new IllegalArgumentException("Divisor cannot be 0, division by zero");
-                    }
+                    System.out.print("Enter action...");
+                    String action = scanner.next();
                 
-                    if (dividend < divisor) {
-                        System.out.println("The result of this expression is zero!");
+                    if (action.equals("/")) {
+                        String result = facade.longDivision(firstNum, secondNum);
+                        System.out.println("\n" + result);
                     } else {
-                        String result; 
-                        result = form.formatToPrint(calc.longDivisions(dividend, divisor));
-                        System.out.println(result);
+                        System.out.println("\n" + "We apologies it's action under development!");
                     }
                 }
-            } 
-        } catch (InputMismatchException ex){
-            System.out.println("Somethink went wrong, please try again");
+            } catch (InputMismatchException ex) {
+                System.out.println("Somethink went wrong! please reboot the program");
+                scanner.close();
+                break;
+                
+            } catch (ArithmeticException ex) {
+                System.out.println("\n" + "Hovewer, you are tryed divide by zero!!!");
+            }
         }
     }
 }
