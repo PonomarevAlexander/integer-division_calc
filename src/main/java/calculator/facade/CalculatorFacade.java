@@ -1,4 +1,9 @@
+package calculator.facade;
+
 import java.util.List;
+import calculator.dto.DTO;
+import calculator.gears.Calculate;
+import calculator.gears.DivisionFormatter;
 
 public class CalculatorFacade {
     

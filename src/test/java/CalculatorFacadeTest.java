@@ -3,6 +3,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import calculator.facade.CalculatorFacade;
+import calculator.gears.Calculate;
+import calculator.gears.DivisionFormatter;
+
 class CalculatorFacadeTest {
     
     DivisionFormatter formatter;

@@ -1,3 +1,4 @@
+package calculator.dto;
 
 public class DivisionDTO extends DTO {
     

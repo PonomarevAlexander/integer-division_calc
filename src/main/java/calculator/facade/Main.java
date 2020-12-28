@@ -1,5 +1,9 @@
+package calculator.facade;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import calculator.gears.Calculate;
+import calculator.gears.DivisionFormatter;
 
 public class Main {
 
@@ -39,7 +43,6 @@ public class Main {
                 System.out.println("Somethink went wrong! please reboot the program");
                 System.out.println(WARNING_SEPARATOR);
                 scanner.close();
-                break;
                 
             } catch (ArithmeticException ex) {
                 System.out.println("\n" + WARNING_SEPARATOR);

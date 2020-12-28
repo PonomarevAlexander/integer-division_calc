@@ -1,4 +1,8 @@
+package calculator.gears;
 import java.util.List;
+
+import calculator.dto.DTO;
+import calculator.dto.DivisionDTO;
 
 public class DivisionFormatter implements Formatter {
     
