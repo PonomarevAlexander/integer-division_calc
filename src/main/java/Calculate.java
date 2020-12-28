@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Calculate {
     
-    public List<DivisionDTO> longDivisions(int dividend, int divisor) {
+    public List<DTO> longDivisions(int dividend, int divisor) {
         dividend = Math.abs(dividend);
         divisor = Math.abs(divisor);
-        List<DivisionDTO> stages = new ArrayList<>();
+        List<DTO> stages = new ArrayList<>();
         StringBuilder reminder = new StringBuilder();
         String[] digits = String.valueOf(dividend).split("");
         Integer divisorDigit = (int) Math.log10(divisor) + 1;

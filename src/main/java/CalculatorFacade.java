@@ -11,7 +11,7 @@ public class CalculatorFacade {
     }
     
     public String longDivision(int dividend, int divisor) {
-        List<DivisionDTO> stages = calculate.longDivisions(dividend, divisor);
+        List<DTO> stages = calculate.longDivisions(dividend, divisor);
         return formatter.formatToPrint(stages);
         
     }
