@@ -6,18 +6,17 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import calculator.dto.DTO;
-import calculator.gears.Calculate;
+import calculator.gears.Calculator;
 import calculator.gears.DivisionFormatter;
 
 class DivisionFormatterTest {
     
     DivisionFormatter formatter;
-    private static Calculate calc = new Calculate();
+    private static Calculator calc = new Calculator();
     private static final int DIVIDEND = 375;
     private static final int DIVISOR = 9;
-    private static final List<DTO> STAGES = calc.longDivisions(DIVIDEND, DIVISOR);
-    private static final List<DTO> EMPTY_STAGES_LIST = new ArrayList<>();
+    private static final List<DDivisionDto> STAGES = calc.calculate(DIVIDEND, DIVISOR);
+    private static final List<DDivisionDto> EMPTY_STAGES_LIST = new ArrayList<>();
     private static final String EXPECTED = "_375│9\n"
             + " 36 │--\n"
             + " -- │41\n"

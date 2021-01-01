@@ -2,7 +2,7 @@ package calculator.facade;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import calculator.gears.Calculate;
+import calculator.gears.Calculator;
 import calculator.gears.DivisionFormatter;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
         final String SEPARATOR = "------------------------------------";
         final String WARNING_SEPARATOR = "=================================================";
         Scanner scanner = new Scanner(System.in);
-        CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculate());
+        CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculator());
         
         while (true) {
             try {
@@ -38,7 +38,7 @@ public class Main {
                         System.out.println("\n" + "We apologies it's action under development!");
                     }
                 }
-            } catch (InputMismatchException ex) {
+            } catch (InputMismatchException | IllegalStateException ex) {
                 System.out.println(WARNING_SEPARATOR);
                 System.out.println("Somethink went wrong! please reboot the program");
                 System.out.println(WARNING_SEPARATOR);
@@ -48,6 +48,7 @@ public class Main {
                 System.out.println("\n" + WARNING_SEPARATOR);
                 System.out.println("Possibly, you are tryed divide by zero!!!");
                 System.out.println(WARNING_SEPARATOR);
+                
             }
         }
     }

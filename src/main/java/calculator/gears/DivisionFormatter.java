@@ -1,57 +1,41 @@
 package calculator.gears;
-import java.util.List;
-
-import calculator.dto.DTO;
-import calculator.dto.DivisionDTO;
 
 public class DivisionFormatter implements Formatter {
     
     @Override
-    public String formatToPrint(List<DTO> stages) {
-        if (stages.isEmpty()) {
-            throw new IllegalArgumentException("This stages list is empty!!!");
-        }
-        
+    public String formatToPrint(DivisionDto dto) {
         StringBuilder result = new StringBuilder();
         StringBuilder quotient = new StringBuilder();
-        int dividend = ((DivisionDTO) stages.get(0)).getDividend();
-        int divisor = ((DivisionDTO) stages.get(0)).getDivisor();
         
-        
-        // There is extracting data from DTO.
-        for (DTO stage : stages) {
-            //  Cast DTO to DivisionDTO one by one 
-            DivisionDTO divisionStage = (DivisionDTO) stage;
-            
-            if (divisionStage.getReminderNumber() >= divisionStage.getDivisor()) {
-                String lastReminder = String.format("%" + (divisionStage.getIndex() + 2)
-                        + "s", "_" + divisionStage.getReminderNumber().toString());
+        for (DivisionStep step : dto.getDivisionStep()) {
+            if (step.getReminderNumber() >= dto.getDivisor()) {
+                String lastReminder = String.format("%" + (step.getStepCounter() + 2)
+                        + "s", "_" + step.getReminderNumber().toString());
                 result.append(lastReminder).append("\n");
             
-                String multiply = String.format("%" + (divisionStage.getIndex() + 2)
-                        + "d", divisionStage.getMultiplyResult());
+                String multiply = String.format("%" + (step.getStepCounter() + 2)
+                        + "d", step.getMultiplyResult());
                 result.append(multiply).append("\n");
             
-                Integer tab = lastReminder.length() - calculateDigit(divisionStage.getMultiplyResult());
-                result.append(makeDivider(divisionStage.getReminderNumber(), tab)).append("\n");
+                Integer tab = lastReminder.length() - calculateDigit(step.getMultiplyResult());
+                result.append(makeDivider(step.getReminderNumber(), tab)).append("\n");
             
-                quotient.append(divisionStage.getReminderNumber() / divisionStage.getDivisor());
+                quotient.append(step.getReminderNumber() / dto.getDivisor());
             
-                divisionStage.setReminder(0, divisionStage.getReminder().length(), 
-                        divisionStage.getMod().toString());
-                divisionStage.setReminderNumber(Integer.parseInt(divisionStage.getReminder().toString()));
+                dto.refreshReminderOnStep(step.getMod());
+                step.setReminderNumber(Integer.parseInt(dto.getReminder()));
             } else {
-                if (divisionStage.getIndex() >= divisionStage.getDivisorDigit()) {
+                if (step.getStepCounter() >= dto.getDivisorDigit()) {
                     quotient.append(0);
                 }
             } 
             
-            if (divisionStage.getIndex() == divisionStage.getDigitCounter() - 1) {
-                result.append(String.format("%" + (divisionStage.getIndex() + 2) + "s", 
-                        divisionStage.getReminderNumber().toString())).append("\n");
+            if (step.getStepCounter() == dto.getDigitCounter() - 1) {
+                result.append(String.format("%" + (step.getStepCounter() + 2) + "s", 
+                        step.getReminderNumber().toString())).append("\n");
             }
         }
-        modifyResultToView(dividend, divisor, result, quotient);
+        modifyResultToView(dto.getDividend(), dto.getDivisor(), result, quotient);
         return result.toString();
     }
     

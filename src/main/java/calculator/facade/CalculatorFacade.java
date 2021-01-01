@@ -1,23 +1,20 @@
 package calculator.facade;
 
-import java.util.List;
-import calculator.dto.DTO;
-import calculator.gears.Calculate;
-import calculator.gears.DivisionFormatter;
+import calculator.gears.*;
 
 public class CalculatorFacade {
     
     private DivisionFormatter formatter;
-    private Calculate calculate;
+    private Calculator calc;
 
-    public CalculatorFacade(DivisionFormatter formatter, Calculate calculate) {
+    public CalculatorFacade(DivisionFormatter formatter, Calculator calculate) {
          this.formatter = formatter;
-         this.calculate = calculate;
+         this.calc = calculate;
     }
     
     public String longDivision(int dividend, int divisor) {
-        List<DTO> stages = calculate.longDivisions(dividend, divisor);
-        return formatter.formatToPrint(stages);
+        DivisionDto divisionDto =  calc.calculate(dividend, divisor);
+        return formatter.formatToPrint(divisionDto);
         
     }
 }

@@ -4,13 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calculator.facade.CalculatorFacade;
-import calculator.gears.Calculate;
+import calculator.gears.Calculator;
 import calculator.gears.DivisionFormatter;
 
 class CalculatorFacadeTest {
     
     DivisionFormatter formatter;
-    Calculate calc;
+    Calculator calc;
     CalculatorFacade facade;
     private static final int DIVIDEND = 375;
     private static final int DIVISOR = 9;
@@ -26,7 +26,7 @@ class CalculatorFacadeTest {
     @BeforeEach
     void testInitInstance() {
         formatter = new DivisionFormatter();
-        calc = new Calculate();
+        calc = new Calculator();
         facade = new CalculatorFacade(formatter, calc);
     }
     
