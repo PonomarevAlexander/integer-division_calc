@@ -7,7 +7,7 @@ public class DivisionFormatter implements Formatter {
         StringBuilder result = new StringBuilder();
         StringBuilder quotient = new StringBuilder();
         
-        for (DivisionStep step : dto.getDivisionStep()) {
+        for (DivisionStep step : dto.getDivisionStepList()) {
             if (step.getReminderNumber() >= dto.getDivisor()) {
                 String lastReminder = String.format("%" + (step.getStepCounter() + 2)
                         + "s", "_" + step.getReminderNumber().toString());
@@ -30,9 +30,9 @@ public class DivisionFormatter implements Formatter {
                 }
             } 
             
-            if (step.getStepCounter() == dto.getDigitCounter() - 1) {
+            if (step.getStepCounter() == dto.getDividendLength() - 1) {
                 result.append(String.format("%" + (step.getStepCounter() + 2) + "s", 
-                        step.getReminderNumber().toString())).append("\n");
+                        step.getReminderNumber().toString())).append("\n"); 
             }
         }
         modifyResultToView(dto.getDividend(), dto.getDivisor(), result, quotient);
@@ -48,11 +48,11 @@ public class DivisionFormatter implements Formatter {
     }
     
     private String assemblyString(int numberOfSymbols, char symbol) {
-        StringBuilder string = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < numberOfSymbols; i++) {
-            string.append(symbol);
+            result.append(symbol);
         }
-        return string.toString();
+        return result.toString();
     }
     
     private void modifyResultToView(Integer dividend, Integer divisor, StringBuilder result, StringBuilder quotient) {

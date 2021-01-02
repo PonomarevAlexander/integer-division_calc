@@ -9,7 +9,8 @@ public class DivisionDto {
         private int dividend;
         private int divisor;
         private int digitCounter;
-        private List<DivisionStep> divisionStep = new ArrayList<>();
+        private int dividendLength;  
+        private List<DivisionStep> divisionStepList = new ArrayList<>();
         private Integer divisorDigit;
         
         
@@ -31,8 +32,8 @@ public class DivisionDto {
         public int getDigitCounter() {
             return digitCounter;
         }
-        public List<DivisionStep> getDivisionStep() {
-            return divisionStep;
+        public List<DivisionStep> getDivisionStepList() {
+            return divisionStepList;
         }
         public void addDigitToReminder(String digit) {
             this.reminder.append(digit);
@@ -49,14 +50,20 @@ public class DivisionDto {
         public void setDigitCounter(int digitCounter) {
             this.digitCounter = digitCounter;
         }
-        public void addToDivisionStep(DivisionStep step) {
-            this.divisionStep.add(step);
+        public void addToDivisionStepList(DivisionStep step) {
+            this.divisionStepList.add(step);
         }
         public Integer getDivisorDigit() {
             return divisorDigit;
         }
         public void setDivisorDigit(Integer divisorDigit) {
             this.divisorDigit = divisorDigit;
+        }
+        public int getDividendLength() {
+            return dividendLength;
+        }
+        public void setDividendLength(int dividerLength) {
+            this.dividendLength = dividerLength;
         }
         
         
