@@ -37,7 +37,7 @@ public class DivisionStep {
     public void setMod(Integer mod) {
         this.mod = mod;
     }
-    public void setIndex(int index) {
-        this.stepCounter = index;
+    public void setStepCounter(int stepCounter) {
+        this.stepCounter = stepCounter;
     }
 }

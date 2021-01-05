@@ -1,11 +1,13 @@
 package calculator.gears;
+
 public class Calculator {
     
     public DivisionDto calculate(int dividend, int divisor) {
         DivisionDto divisionDto = new DivisionDto(Math.abs(dividend), Math.abs(divisor));
+        
         String[] digits = String.valueOf(dividend).split("");
         Integer reminderNumber;
-        Integer multiplyResult;
+        Integer multiplyResult; 
         Integer mod;
         divisionDto.setDivisorDigit((int) Math.log10(divisor) + 1);
         divisionDto.setDividendLength(digits.length);
