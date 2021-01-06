@@ -22,7 +22,7 @@ class CalculatorFacadeTest {
     
     
     @Test
-    void testVerifyLongDivisionMethod() {
+    void testTimesVerifyLongDivisionMethod() {
         facade.longDivision(anyInt(), anyInt());
         
         verify(calculator).calculate(anyInt(), anyInt());
