@@ -22,6 +22,4 @@ class DivisionFormatterTest {
         assertNotSame(0, testDto.getDividend());
         assertNotSame(0, testDto.getDivisor());
     }
-    
-
 }

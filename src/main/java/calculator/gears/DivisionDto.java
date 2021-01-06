@@ -8,7 +8,6 @@ public class DivisionDto {
         private StringBuilder reminder = new StringBuilder();
         private int dividend;
         private int divisor;
-//        private int digitCounter;
         private int dividendLength;  
         private List<DivisionStep> divisionStepList = new ArrayList<>();
         private Integer divisorDigit;
@@ -29,9 +28,6 @@ public class DivisionDto {
         public int getDivisor() {
             return divisor;
         }
-//        public int getDigitCounter() {
-//            return digitCounter;
-//        }
         public List<DivisionStep> getDivisionStepList() {
             return divisionStepList;
         }
@@ -47,9 +43,6 @@ public class DivisionDto {
         public void setDivisor(int divisor) {
             this.divisor = divisor;
         }
-//        public void setDigitCounter(int digitCounter) {
-//            this.digitCounter = digitCounter;
-//        }
         public void addToDivisionStepList(DivisionStep step) {
             this.divisionStepList.add(step);
         }
