@@ -12,7 +12,7 @@ class CalculatorTest {
     private DivisionDto dto;
     private static final int DIVIDEND = 4027;
     private static final int DIVISOR = 24;
-    private static final int ZERO_DEVISOR = 0;
+    private static final int ZERO_DIVISOR = 0;
 
     
     @BeforeEach
@@ -32,7 +32,7 @@ class CalculatorTest {
     
     @Test
     void testShouldThrowExceptionWhileDividingByZero() {
-        assertThrows(ArithmeticException.class, () -> {calculator.calculate(DIVIDEND, ZERO_DEVISOR);});
+        assertThrows(ArithmeticException.class, () -> {calculator.calculate(DIVIDEND, ZERO_DIVISOR);});
         
     }
 
