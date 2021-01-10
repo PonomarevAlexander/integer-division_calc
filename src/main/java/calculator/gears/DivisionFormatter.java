@@ -5,6 +5,7 @@ public class DivisionFormatter implements Formatter {
     private static final String SUBTRACT = "_";
     private static final String SIDE_SEPARATOR = "|";
     private static final char DIVIDER_SEPARATOR = '-';
+    private static final char SPACE = ' ';
     
     
     @Override
@@ -49,7 +50,7 @@ public class DivisionFormatter implements Formatter {
     
     
     private String makeDivider(Integer reminderNumber, Integer tab) {
-        return assemblyString(tab, ' ') + assemblyString(calculateDigit(reminderNumber), DIVIDER_SEPARATOR);
+        return assemblyString(tab, SPACE) + assemblyString(calculateDigit(reminderNumber), DIVIDER_SEPARATOR);
     }
     
     
@@ -77,8 +78,8 @@ public class DivisionFormatter implements Formatter {
         }
         
         int tab = calculateDigit(dividend) + 1 - index[0];
-        result.insert(index[2], assemblyString(tab, ' ') + SIDE_SEPARATOR + quotient.toString());
-        result.insert(index[1], assemblyString(tab, ' ') + SIDE_SEPARATOR + assemblyString(quotient.length(), DIVIDER_SEPARATOR));
+        result.insert(index[2], assemblyString(tab, SPACE) + SIDE_SEPARATOR + quotient.toString());
+        result.insert(index[1], assemblyString(tab, SPACE) + SIDE_SEPARATOR + assemblyString(quotient.length(), DIVIDER_SEPARATOR));
         result.insert(index[0], SIDE_SEPARATOR + divisor);
         result.replace(1, index[0], dividend.toString());
     }
