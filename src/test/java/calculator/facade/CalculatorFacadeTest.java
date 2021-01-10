@@ -7,41 +7,67 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class CalculatorFacadeTest {
     
-    private static final int DIVIDEND = 47625;
-    private static final int DIVISOR = 20;
+    private static final int DIVIDEND = 4027;
+    private static final int DIVISOR = 24;
+    private static final String EXPECTED_RESULT = "_4027|24\n"
+            + " 24  |---\n"
+            + " --  |167\n"
+            + "_162\n"
+            + " 144\n"
+            + " ---\n"
+            + " _187\n"
+            + "  168\n"
+            + "  ---\n"
+            + "   19\n";
+    private CalculatorFacade facade;
+    private Calculator calculator;
+    private DivisionFormatter formatter;
     private DivisionDto dto;
     
     
+    
     @InjectMocks
-    private CalculatorFacade facade;
+    private CalculatorFacade mockedFacade;
     
     @Mock
-    Calculator calculator;
+    private Calculator mockedCalculator;
     
     @Mock
-    DivisionFormatter formatter;
+    private DivisionFormatter mockedFormatter;
     
     
     @Test
-    void testTimesVerifyLongDivisionMethod() {
-        facade.longDivision(DIVIDEND, DIVISOR);
+    void testTimesInvokationsLongDivisionMethod() {
+        mockedFacade.longDivision(DIVIDEND, DIVISOR);
         
-        verify(calculator).calculate(DIVIDEND, DIVISOR);
-        verify(formatter).formatToPrint(dto);
+        verify(mockedCalculator).calculate(DIVIDEND, DIVISOR);
+        verify(mockedFormatter).formatToPrint(dto);
     }
     
     @Test
     void testOrderVerifyLongDivisionMethod() {
-        facade.longDivision(DIVIDEND, DIVISOR);
-        InOrder inOrder = inOrder(calculator, formatter);
+        mockedFacade.longDivision(DIVIDEND, DIVISOR);
+        InOrder inOrder = inOrder(mockedCalculator, mockedFormatter);
         
-        inOrder.verify(calculator).calculate(DIVIDEND, DIVISOR);
-        inOrder.verify(formatter).formatToPrint(dto);
+        inOrder.verify(mockedCalculator).calculate(DIVIDEND, DIVISOR);
+        inOrder.verify(mockedFormatter).formatToPrint(dto);
+    }
+    
+    @Test
+    void testToCheckingReturnedResultOfLongDivisionMethod() {
+        calculator = new Calculator();
+        formatter = new DivisionFormatter();
+        facade = new CalculatorFacade(formatter, calculator);
+        
+        String actual = facade.longDivision(DIVIDEND, DIVISOR);
+        assertEquals(EXPECTED_RESULT, actual);
     }
 }
