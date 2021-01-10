@@ -13,6 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculator());
         
+        
         while (true) {
             try {
                 System.out.println(SEPARATOR);

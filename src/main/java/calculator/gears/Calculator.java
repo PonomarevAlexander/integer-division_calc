@@ -3,9 +3,13 @@ package calculator.gears;
 public class Calculator {
     
     public DivisionDto calculate(int dividend, int divisor) {
-        DivisionDto divisionDto = new DivisionDto(Math.abs(dividend), Math.abs(divisor));
+        if (divisor == 0) {
+            throw new IllegalArgumentException("You are tryed divided by zero");
+        }
         
+        DivisionDto divisionDto = new DivisionDto(Math.abs(dividend), Math.abs(divisor));
         String[] digits = String.valueOf(dividend).split("");
+        
         Integer reminderNumber;
         Integer multiplyResult; 
         Integer mod;
@@ -22,7 +26,6 @@ public class Calculator {
                 multiplyResult = reminderNumber / divisor * divisor;
                 
                 divisionDto.addToDivisionStepList(new DivisionStep(reminderNumber, multiplyResult, mod, i));
-                
                 divisionDto.refreshReminderOnStep(mod);
             }
         }
