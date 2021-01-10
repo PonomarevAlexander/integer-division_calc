@@ -3,9 +3,6 @@ package calculator.gears;
 public class Calculator {
     
     public DivisionDto calculate(int dividend, int divisor) {
-        if (divisor == 0) {
-            throw new IllegalArgumentException("You are tryed divided by zero");
-        }
         
         DivisionDto divisionDto = new DivisionDto(Math.abs(dividend), Math.abs(divisor));
         String[] digits = String.valueOf(dividend).split("");
