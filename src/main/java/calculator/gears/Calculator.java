@@ -13,7 +13,6 @@ public class Calculator {
         divisionDto.setDivisorDigit((int) Math.log10(divisor) + 1);
         divisionDto.setDividendLength(digits.length);
         
-       
         for (int i = 0; i < digits.length; i++) {
             divisionDto.addDigitToReminder(digits[i]);
             reminderNumber = Integer.parseInt(divisionDto.getReminder());

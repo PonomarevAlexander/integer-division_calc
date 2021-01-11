@@ -7,19 +7,17 @@ public class DivisionFormatter implements Formatter {
     private static final char DIVIDER_SEPARATOR = '-';
     private static final char SPACE = ' ';
     
-    
     @Override
     public String formatToPrint(DivisionDto dto) {
         StringBuilder result = new StringBuilder();
         StringBuilder quotient = new StringBuilder();
         
-        
         for (DivisionStep step : dto.getDivisionStepList()) {
             if (step.getReminderNumber() >= dto.getDivisor()) {
-                String lastReminder = String.format("%" + (step.getStepCounter() + 2) + "s", SUBTRACT + step.getReminderNumber().toString());
+                final String lastReminder = String.format("%" + (step.getStepCounter() + 2) + "s", SUBTRACT + step.getReminderNumber().toString());
                 result.append(lastReminder).append("\n");
             
-                String multiply = String.format("%" + (step.getStepCounter() + 2) + "d", step.getMultiplyResult());
+                final String multiply = String.format("%" + (step.getStepCounter() + 2) + "d", step.getMultiplyResult());
                 result.append(multiply).append("\n");
             
                 Integer tab = lastReminder.length() - calculateDigit(step.getMultiplyResult());
@@ -43,16 +41,13 @@ public class DivisionFormatter implements Formatter {
         return result.toString();
     }
     
-    
     private int calculateDigit(int i) {
         return (int) Math.log10(i) + 1;
     }
     
-    
     private String makeDivider(Integer reminderNumber, Integer tab) {
         return assemblyString(tab, SPACE) + assemblyString(calculateDigit(reminderNumber), DIVIDER_SEPARATOR);
     }
-    
     
     private String assemblyString(int numberOfSymbols, char symbol) {
         StringBuilder result = new StringBuilder();
@@ -62,7 +57,6 @@ public class DivisionFormatter implements Formatter {
         }
         return result.toString();
     }
-    
     
     private void modifyResultToView(Integer dividend, Integer divisor, StringBuilder result, StringBuilder quotient) {
         int[] index = new int[3];

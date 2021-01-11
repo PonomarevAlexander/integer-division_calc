@@ -32,8 +32,6 @@ class CalculatorFacadeTest {
     private DivisionFormatter formatter;
     private DivisionDto dto;
     
-    
-    
     @InjectMocks
     private CalculatorFacade mockedFacade;
     
@@ -42,7 +40,6 @@ class CalculatorFacadeTest {
     
     @Mock
     private DivisionFormatter mockedFormatter;
-    
     
     @Test
     void testTimesInvokationsLongDivisionMethod() {

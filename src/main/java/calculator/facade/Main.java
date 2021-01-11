@@ -1,7 +1,7 @@
 package calculator.facade;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import calculator.gears.Calculator;
 import calculator.gears.DivisionFormatter;
 
@@ -12,7 +12,6 @@ public class Main {
         final String WARNING_SEPARATOR = "=================================================";
         Scanner scanner = new Scanner(System.in);
         CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculator());
-        
         
         while (true) {
             try {
@@ -48,8 +47,7 @@ public class Main {
             } catch (ArithmeticException ex) {
                 System.out.println("\n" + WARNING_SEPARATOR);
                 System.out.println("Possibly, you are tryed divide by zero!!!");
-                System.out.println(WARNING_SEPARATOR);
-                
+                System.out.println(WARNING_SEPARATOR); 
             }
         }
     }

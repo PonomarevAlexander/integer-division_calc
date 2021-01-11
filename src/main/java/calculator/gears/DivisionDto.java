@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DivisionDto {
-
         private StringBuilder reminder = new StringBuilder();
         private int dividend;
         private int divisor;
@@ -12,12 +11,10 @@ public class DivisionDto {
         private List<DivisionStep> divisionStepList = new ArrayList<>();
         private Integer divisorDigit;
         
-        
         public DivisionDto(int dividend, int divisor) {
             this.dividend = dividend;
             this.divisor = divisor;
         }
-        
         
         public String getReminder() {
             return reminder.toString();

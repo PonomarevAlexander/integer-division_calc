@@ -14,7 +14,6 @@ class CalculatorTest {
     private static final int DIVISOR = 24;
     private static final int ZERO_DIVISOR = 0;
 
-    
     @BeforeEach
     void init() {
         calculator = new Calculator();
@@ -32,8 +31,6 @@ class CalculatorTest {
     
     @Test
     void testShouldThrowExceptionWhileDividingByZero() {
-        assertThrows(ArithmeticException.class, () -> {calculator.calculate(DIVIDEND, ZERO_DIVISOR);});
-        
+        assertThrows(ArithmeticException.class, () -> {calculator.calculate(DIVIDEND, ZERO_DIVISOR);});  
     }
-
 }
