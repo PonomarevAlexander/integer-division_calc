@@ -6,6 +6,8 @@ public class DivisionFormatter implements Formatter {
     private static final String SIDE_SEPARATOR = "|";
     private static final char DIVIDER_SEPARATOR = '-';
     private static final char SPACE = ' ';
+    private static final String NEW_LINE = "\n";
+    private static final char NEW_LINE_CHAR = '\n';
     
     @Override
     public String formatToPrint(DivisionDto dto) {
@@ -14,14 +16,14 @@ public class DivisionFormatter implements Formatter {
         
         for (DivisionStep step : dto.getDivisionStepList()) {
             if (step.getReminderNumber() >= dto.getDivisor()) {
-                final String lastReminder = String.format("%" + (step.getStepCounter() + 2) + "s", SUBTRACT + step.getReminderNumber().toString());
-                result.append(lastReminder).append("\n");
+                String lastReminder = String.format("%" + (step.getStepCounter() + 2) + "s", SUBTRACT + step.getReminderNumber().toString());
+                result.append(lastReminder).append(NEW_LINE);
             
-                final String multiply = String.format("%" + (step.getStepCounter() + 2) + "d", step.getMultiplyResult());
-                result.append(multiply).append("\n");
+                String multiply = String.format("%" + (step.getStepCounter() + 2) + "d", step.getMultiplyResult());
+                result.append(multiply).append(NEW_LINE);
             
                 Integer tab = lastReminder.length() - calculateDigit(step.getMultiplyResult());
-                result.append(makeDivider(step.getReminderNumber(), tab)).append("\n");
+                result.append(makeDivider(step.getReminderNumber(), tab)).append(NEW_LINE);
             
                 quotient.append(step.getReminderNumber() / dto.getDivisor());
             
@@ -34,7 +36,7 @@ public class DivisionFormatter implements Formatter {
             }
             
             if (step.getStepCounter() == dto.getDividendLength() - 1) {
-                result.append(String.format("%" + (step.getStepCounter() + 2) + "s", step.getReminderNumber().toString())).append("\n"); 
+                result.append(String.format("%" + (step.getStepCounter() + 2) + "s", step.getReminderNumber().toString())).append(NEW_LINE); 
             }
         }
         modifyResultToView(dto.getDividend(), dto.getDivisor(), result, quotient);
@@ -62,7 +64,7 @@ public class DivisionFormatter implements Formatter {
         int[] index = new int[3];
         
         for (int i = 0, j = 0; i < result.length(); i++) {
-            if (result.charAt(i) == '\n') {
+            if (result.charAt(i) == NEW_LINE_CHAR) {
                 index[j] = i;
                 j++;
             }
