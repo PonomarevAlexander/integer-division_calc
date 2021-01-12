@@ -6,10 +6,13 @@ import calculator.gears.Calculator;
 import calculator.gears.DivisionFormatter;
 
 public class Main {
+    
+    private static final String NEW_LINE = "\n";
+    private static final String SLASH = "/";
+    private static final String SEPARATOR = "------------------------------------";
+    private static final String WARNING_SEPARATOR = "=================================================";
 
     public static void main(String[] args) {
-        final String SEPARATOR = "------------------------------------";
-        final String WARNING_SEPARATOR = "=================================================";
         Scanner scanner = new Scanner(System.in);
         CalculatorFacade facade = new CalculatorFacade(new DivisionFormatter(), new Calculator());
         
@@ -30,12 +33,12 @@ public class Main {
                     System.out.print("Enter action...");
                     String action = scanner.next();
                 
-                    if (action.equals("/")) {
-                        System.out.println("\n" + SEPARATOR);
+                    if (action.equals(SLASH)) {
+                        System.out.println(NEW_LINE + SEPARATOR);
                         String result = facade.longDivision(firstNum, secondNum);
-                        System.out.println("\n" + result);
+                        System.out.println(NEW_LINE + result);
                     } else {
-                        System.out.println("\n" + "We apologies it's action under development!");
+                        System.out.println(NEW_LINE + "We apologies it's action under development!");
                     }
                 }
             } catch (InputMismatchException | IllegalStateException ex) {
@@ -45,7 +48,7 @@ public class Main {
                 scanner.close();
                 
             } catch (ArithmeticException ex) {
-                System.out.println("\n" + WARNING_SEPARATOR);
+                System.out.println(NEW_LINE + WARNING_SEPARATOR);
                 System.out.println("Possibly, you are tryed divide by zero!!!");
                 System.out.println(WARNING_SEPARATOR); 
             }
